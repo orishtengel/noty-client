@@ -7,6 +7,13 @@ class AuthApi {
             password: password
         })
     }
+    
+    verifyToken(idToken, email) {
+        return ApiCore.fetch('/verify', HTTPMethod.POST, {
+            idToken: idToken,
+            email: email
+        })
+    }
 
     signup(username, password) {
         return ApiCore.fetch('/signup', HTTPMethod.POST, {

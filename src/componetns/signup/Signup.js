@@ -32,7 +32,9 @@ export const Signup = () => {
     const onSubmit = data => signup(data.email,data.password)
 
     const signup = async (email,password) => {
-        let resp = await sessionContext.signup(email,password)
+       let resp =  await firebase.auth().createUserWithEmailAndPassword(email,password)
+       console.log(resp)
+       
     }
 
     const signupGoogle = () => {

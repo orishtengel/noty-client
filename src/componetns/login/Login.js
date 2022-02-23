@@ -7,12 +7,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import ls from 'local-storage'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Background from './green-gddce8047d_640.jpg'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import AuthApi from '../../api/AuthApi';
 
 const theme = createTheme();
 
@@ -21,6 +25,9 @@ export const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    firebase.auth().signInWithEmailAndPassword(data.get('email'),data.get('password')).then(async (resp) => {
+       ls.setItem("token",await resp.user.getIdToken())
+    })
     console.log({
       email: data.get('email'),
       password: data.get('password'),
