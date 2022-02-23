@@ -9,7 +9,6 @@ export class HTTPMethod {
     static DELETE = 'DELETE'
 }
 
-
 export default class ApiCore {
 
     static async fetch(url, method, body) {

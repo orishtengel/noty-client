@@ -13,12 +13,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Background from './golf-g17efc2cb0_640.jpg'
 import { useForm, Controller } from 'react-hook-form'
 import { SessionContextStore } from '../../context/SessionContext';
+import GoogleButton from 'react-google-button'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 const theme = createTheme();
 
 export const Signup = () => {
 
     const sessionContext = React.useContext(SessionContextStore)
+    const [token, setToken] = React.useState('')
     const { control, handleSubmit } = useForm({
         defaultValues: {
           email: '',
@@ -29,6 +33,12 @@ export const Signup = () => {
 
     const signup = async (email,password) => {
         let resp = await sessionContext.signup(email,password)
+    }
+
+    const signupGoogle = () => {
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((userCred) => {
+        setToken(userCred.credential.tokenId)
+      })
     }
 
   return (<>
@@ -102,6 +112,7 @@ export const Signup = () => {
               >
                 Sign Up
               </Button>
+              <GoogleButton onClick={signupGoogle} />
               </form>
               <Grid container>
                 <Grid item xs>
