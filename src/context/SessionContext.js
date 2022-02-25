@@ -1,8 +1,8 @@
 import React from 'react'
-import AuthApi from '../api/AuthApi';
 import ls from 'local-storage'
-import SessionService from '../services/SessionService';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 
 const defaultState = {
@@ -23,23 +23,24 @@ export const SessionContextStore = React.createContext(defaultState)
 
 const SessionContext = (props) => {
     const [state, dispatch] = React.useReducer(reducer, defaultState)
-    const navigate = useNavigate()
+    const history = useHistory()
 
     const login = async (username, password) => {
-        let resp = await AuthApi.login(username, password)
-        if(resp.ok) {
-            dispatch({type: 'SET_USER', data: { email: username, user: resp.data.user }})
-            ls.set('token', resp.data.token)
-            navigate.push('/')
+        const resp = await firebase.auth().signInWithEmailAndPassword(username,password)
+        if(resp) {
+            ls.set("token",await resp.user.getIdToken())
+            dispatch({type: 'SET_USER', data: { email: username }})
+            history.push('/')
         }
         return resp
     }
     const signup = async (username, password) => {
-        let resp = await AuthApi.signup(username, password)
-        if(resp.ok) {
-            dispatch({type: 'SET_USER', data: { email: username, user: resp.data.user }})
-            ls.set('token', resp.data.token)
-            navigate.push('/')
+        const resp = await firebase.auth().createUserWithEmailAndPassword(username,password)
+        if(resp) {
+            console.log(resp)
+            dispatch({type: 'SET_USER', data: { email: username }})
+            ls.set('token', await resp.user.getIdToken())
+            history.push('/')
         }
         return resp
     }
@@ -55,7 +56,7 @@ const SessionContext = (props) => {
     // }
 
     const logout = () => {
-        navigate.push('/login')
+        history.push('/login')
         ls.remove('token')
         dispatch({type: 'SET_USER', data: { email:'', user: ''}})
     }

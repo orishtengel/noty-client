@@ -7,15 +7,13 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Background from './golf-g17efc2cb0_640.jpg'
+import { createTheme } from '@mui/material/styles';
+import Background from './courtney-cook-h7aVq-7FfPw-unsplash.jpg'
 import { useForm, Controller } from 'react-hook-form'
 import { SessionContextStore } from '../../context/SessionContext';
-import GoogleButton from 'react-google-button'
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+
 
 const theme = createTheme();
 
@@ -29,22 +27,19 @@ export const Signup = () => {
           password: ''
         }
       });
-    const onSubmit = data => signup(data.email,data.password)
+    const onSubmit = data => signup(data.email, data.password)
 
-    const signup = async (email,password) => {
-       let resp =  await firebase.auth().createUserWithEmailAndPassword(email,password)
-       console.log(resp)
-       
+    const signup = (email,password) => {
+       sessionContext.signup(email,password)
     }
 
-    const signupGoogle = () => {
-      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((userCred) => {
-        setToken(userCred.credential.tokenId)
-      })
-    }
+    // const signupGoogle = () => {
+    //   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((userCred) => {
+    //     setToken(userCred.credential.tokenId)
+    //   })
+    // }
 
   return (<>
-    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -71,8 +66,8 @@ export const Signup = () => {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1 , bgcolor:'primary.main'}}>
+              <PermContactCalendarIcon color='white' />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign Up
@@ -107,6 +102,7 @@ export const Signup = () => {
                                         {...field}
                                     /> }/>
               <Button
+                onClick={signup}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -114,7 +110,6 @@ export const Signup = () => {
               >
                 Sign Up
               </Button>
-              <GoogleButton onClick={signupGoogle} />
               </form>
               <Grid container>
                 <Grid item xs>
@@ -131,7 +126,7 @@ export const Signup = () => {
             </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    
     </>
   );
 }

@@ -1,0 +1,22 @@
+.MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    margin-top: 2%;
+     margin-bottom: 5%;
+     width: 100%;
+ }
+ 
+ 
+ .dialog{
+     overflow:hidden;
+     background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
+     background-color: transparent;
+ }
+ 
+ .gradient {
+     background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
+ }
+ 
+ .h2 {
+     color: green;
+     font-weight:700!important;
+     font-family: cursive !important;
+ }

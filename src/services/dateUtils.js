@@ -1,27 +1,19 @@
-import dayjs from "dayjs"
 
 
-export const isSameDateCustom = (date1, date2) => {
-    let d1 = dayjs(date1)
-    let d2 = dayjs(date2)
-    return d1.format("YYYY-MM-DD") == d2.format("YYYY-MM-DD")
+export const formatAMPM = (date) => {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
 }
 
-export const getDaysAhead = (startDate, count) => {
-    let dates = [startDate]
-    let nextDay = startDate
-    for(let i = 0; i < count; i++) {
-        nextDay = dayjs(nextDay).add(1, 'day')
-        dates.push(nextDay.toDate())
-    }
-    return dates
-}
-
-export const isMorning = (date) => {
-    console.log(date)
-    // return date.
-}
-
-export const isEvening = (date) => {
-    return !isMorning(date)
+export const getName = (name) => {
+    var match = name.match(/^(\w+)\..*\.(\w+)@/);
+    var empname = match[1];
+    var emplname = match[2];
+    return empname 
 }

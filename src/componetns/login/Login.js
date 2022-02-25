@@ -7,35 +7,24 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
-import ls from 'local-storage'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Background from './green-gddce8047d_640.jpg'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import AuthApi from '../../api/AuthApi';
+import { SessionContextStore } from '../../context/SessionContext';
 
-const theme = createTheme();
 
 export const Login = () => {
-    
+  const sessionContext = React.useContext(SessionContextStore)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    firebase.auth().signInWithEmailAndPassword(data.get('email'),data.get('password')).then(async (resp) => {
-       ls.setItem("token",await resp.user.getIdToken())
-    })
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    sessionContext.login(data.get('email'), data.get('password'))
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -62,8 +51,8 @@ export const Login = () => {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+              <AccountCircleIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
@@ -117,6 +106,5 @@ export const Login = () => {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
   );
 }
