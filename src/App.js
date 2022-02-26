@@ -17,6 +17,7 @@ import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import { LoginProtectedRoute } from './services/LoginProtectedRoute';
 import { AppBarNoty } from './componetns/appbar/AppBarNoty';
+import CoursesContext from './context/CoursesContext';
 
 const theme = createTheme({
   palette: {
@@ -33,14 +34,14 @@ function App() {
 
   const [auth,setAuth] = React.useState(false || window.localStorage.getItem("auth") == true)
 
-  useEffect(() =>{
-    firebase.auth().onAuthStateChanged((userCred) => {
-      if(userCred) {
-        setAuth(true)
-        window.localStorage.setItem("auth","true")
-      }
-    })
-  })
+  // useEffect(() =>{
+  //   firebase.auth().onAuthStateChanged((userCred) => {
+  //     if(userCred) {
+  //       setAuth(true)
+  //       window.localStorage.setItem("auth","true")
+  //     }
+  //   })
+  // })
 
   return (<>
   <ThemeProvider theme = {theme}>
@@ -54,8 +55,10 @@ function App() {
             <Signup/>
           </Route>
           <LoginProtectedRoute path="/">
-            <AppBarNoty/>
-            <HomeScreen/>
+            <CoursesContext>
+              <AppBarNoty/>
+              <HomeScreen/>
+            </CoursesContext>
           </LoginProtectedRoute>
         </Switch>
       </SessionContext>
