@@ -16,7 +16,6 @@ export default class ApiCore {
             EventBus.publish('SHOW_LOADING')
 
             let fullUrl = SERVER_URL + url
-            console.log(fullUrl)
 
             if(!method) method = HTTPMethod.GET
     

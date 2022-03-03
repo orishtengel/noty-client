@@ -1,31 +1,35 @@
 import {Button, CardActions, Typography } from '@mui/material'
 import React from 'react'
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { SubscribeDialog } from '../subscribe_dialog/SubscibeDialog';
 import './CardWebsite.css'
-import {ReactComponent as GolfSvg} from '../../assets/undraw_golf_neir.svg'
+import { SubscribeContextStore } from '../../context/SubscribeContext';
 
 
-export const CardWebsite = ({image}) => {
+export const CardWebsite = ({email, appdata}) => {
 
-    const [dialogData, setDialogData] = React.useState({open: false, date: new Date()})
+    const [dialogData, setDialogData] = React.useState({open: false , data : {}})
+    const subscribeContext = React.useContext(SubscribeContextStore)
+    const keyWebsite = Object.keys(appdata)
 
     const openDialog = () => {
-        setDialogData({open: true,date: new Date()})
+        setDialogData({open: true, data: dialogData})
     }
-    const subscibeSelect = async (date) => {
-        setDialogData({open: false, date: new Date()})
+    const subscibeSelect = () => {
+        subscribeContext.addSubscribe(keyWebsite[0], email, dialogData.data.date, dialogData.data.startTime, 
+          dialogData.data.endTime, dialogData.data.frequncy)
+        setDialogData({open: false, data: dialogData})
     }
+    
 
     return(<>
      <Card >
       <CardMedia
         component="img"
         height="140"
-        image={image}
+        image={appdata[keyWebsite].picture}
         alt="green iguana"
       />
       <CardContent>
@@ -33,14 +37,14 @@ export const CardWebsite = ({image}) => {
           Course
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        Los Robles Greens Golf Course
+         {appdata[keyWebsite].name}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={openDialog} size="small">Subscribe</Button>
+        <Button className='left' variant='outlined' onClick={openDialog} size="small">Subscribe</Button>
       </CardActions>
     </Card>
-    <SubscribeDialog data={dialogData} OnSubscribeSelect={subscibeSelect}/>
+    <SubscribeDialog dataWebsite={dialogData} OnSubscribeSelect={subscibeSelect}/>
 
     </>)
 }

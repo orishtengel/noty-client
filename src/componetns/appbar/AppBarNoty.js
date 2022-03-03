@@ -41,7 +41,7 @@ export const AppBarNoty = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Logo
           </Typography>
-          <Avatar  size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >GS</Avatar>
+          <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.user)}</Avatar>
         </Toolbar>
       </AppBar>
     </Box>
@@ -50,9 +50,9 @@ export const AppBarNoty = () => {
                 <br/>
                 <br/>
                 <FlexView column hAlignContent='center'>
-                     <Avatar src={sessionContext.email} size={90} color={'#ff9234'} style={{borderWidth: "2px", color: 'white', border:'solid'}} />
+                     <Avatar sx={{bgcolor:'#0b5b3c'}} size={90} color={'#ff9234'} style={{borderWidth: "2px", color: 'white', border:'solid'}} />
                      <br/>
-                    <div style={{color: 'white', fontWeight: 'bold', fontSize: '1.3em', textTransform: 'capitalize'}}>{sessionContext.email}</div>
+                    <div style={{color: 'white', fontWeight: 'bold', fontSize: '1.3em', textTransform: 'capitalize'}}>{sessionContext.user?.name}</div>
                 </FlexView>
                 <br/>
                 <Divider  className="white-divdier" />

@@ -13,6 +13,9 @@ import Background from './courtney-cook-h7aVq-7FfPw-unsplash.jpg'
 import { useForm, Controller } from 'react-hook-form'
 import { SessionContextStore } from '../../context/SessionContext';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import FlexView from 'react-flexview/lib';
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 
 
 const theme = createTheme();
@@ -24,20 +27,17 @@ export const Signup = () => {
     const { control, handleSubmit } = useForm({
         defaultValues: {
           email: '',
-          password: ''
+          password: '',
+          name: '',
+          phone: '',
         }
       });
-    const onSubmit = data => signup(data.email, data.password)
+    const onSubmit = data => signup(data.email, data.password, data.firstname + " " + data.lastname, data.phone)
 
-    const signup = (email,password) => {
-       sessionContext.signup(email,password)
+    const signup = (email,password,name,phone) => {
+       sessionContext.signup(email, password)
+       sessionContext.createUser(email, name, phone)
     }
-
-    // const signupGoogle = () => {
-    //   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((userCred) => {
-    //     setToken(userCred.credential.tokenId)
-    //   })
-    // }
 
   return (<>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -87,6 +87,45 @@ export const Signup = () => {
                                         autoFocus
                                         {...field}
                                     /> } />
+            <FlexView >
+              <Controller
+                  name="firstname"
+                  control={control}
+                  render={({ field }) => <TextField
+                                          margin="normal"
+                                          required
+                                          fullWidth
+                                          id="firstname"
+                                          label="First Name"
+                                          name="firstname"
+                                          autoComplete="firstname"
+                                          autoFocus
+                                          {...field}
+                                      /> } />
+              <Controller
+                  name="lastname"
+                  control={control}
+                  render={({ field }) => <TextField
+                                          margin="normal"
+                                          required
+                                          fullWidth
+                                          id="lastname"
+                                          label="Last Name"
+                                          name="lastname"
+                                          autoComplete="lastname"
+                                          autoFocus
+                                          {...field}
+                                      /> } />
+            </FlexView>
+            <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field }) => <PhoneInput
+                                          placeholder="Enter phone number"
+                                          country={'us'}
+                                          required
+                                          {...field}
+                                      /> } />
             <Controller 
                 name='password'
                 control={control}

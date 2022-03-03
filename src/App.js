@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Login } from './componetns/login/Login';
 import { Signup } from './componetns/signup/Signup';
-import SessionContext from './context/SessionContext';
+import SessionContext, { SessionContextStore } from './context/SessionContext';
 import './config_firebase/ConfigFirebase'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -17,7 +17,8 @@ import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import { LoginProtectedRoute } from './services/LoginProtectedRoute';
 import { AppBarNoty } from './componetns/appbar/AppBarNoty';
-import CoursesContext from './context/CoursesContext';
+import ApplicationsContext, { ApplicationsContextStore } from './context/ApplicationsContext';
+import SubscribeContext from './context/SubscribeContext';
 
 const theme = createTheme({
   palette: {
@@ -31,18 +32,7 @@ const theme = createTheme({
 });
 
 function App() {
-
-  const [auth,setAuth] = React.useState(false || window.localStorage.getItem("auth") == true)
-
-  // useEffect(() =>{
-  //   firebase.auth().onAuthStateChanged((userCred) => {
-  //     if(userCred) {
-  //       setAuth(true)
-  //       window.localStorage.setItem("auth","true")
-  //     }
-  //   })
-  // })
-
+  
   return (<>
   <ThemeProvider theme = {theme}>
     <Router>
@@ -55,10 +45,12 @@ function App() {
             <Signup/>
           </Route>
           <LoginProtectedRoute path="/">
-            <CoursesContext>
+            <ApplicationsContext>
               <AppBarNoty/>
+              <SubscribeContext>
               <HomeScreen/>
-            </CoursesContext>
+              </SubscribeContext>
+            </ApplicationsContext>
           </LoginProtectedRoute>
         </Switch>
       </SessionContext>

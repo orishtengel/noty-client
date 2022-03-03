@@ -1,19 +1,19 @@
+import dayjs from "dayjs"
 
-
-export const formatAMPM = (date) => {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
+export const formatUTC = (date) => {
+  return date.getUTCHours() + ':' + date.getUTCMinutes()
 }
 
-export const getName = (name) => {
-    var match = name.match(/^(\w+)\..*\.(\w+)@/);
-    var empname = match[1];
-    var emplname = match[2];
-    return empname 
+export const shortDate = (date) => {
+  let d = dayjs(date)
+  return d.format('YYYY-MM-DD')
+}
+
+export const getName = (user) => {
+  if (user && user.name) {
+    return user.name.split(" ").map((n)=>n[0]).join("").toUpperCase()
+  }
+  else {
+    return "GS"
+  }
 }

@@ -1,32 +1,56 @@
 import * as React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel,Radio, RadioGroup,  TextField } from "@mui/material";
-import TimePicker from '@mui/lab/TimePicker';
 import { useForm, Controller } from 'react-hook-form'
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import './SubscribeDialog.css'
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { formatAMPM } from '../../services/dateUtils';
+import {formatUTC, shortDate } from '../../services/dateUtils';
+import { TimePicker } from '@mui/lab';
 
 
-export const SubscribeDialog = ({data, OnSubscribeSelect}) => {
-    const date = new Date()
-    const { control, handleSubmit } = useForm({
+export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
+    const dateNow = new Date()
+    const [frequncy, setFrequncy] = React.useState(false);
+
+    const handleChange = (event) => {
+      setFrequncy(event.target.value);
+    };
+    const { control, handleSubmit,setValue, getValues } = useForm({
         defaultValues: {
-          date: date,
-          startTime: formatAMPM(date),
-          endTime: formatAMPM(date),
+          date: dateNow,
+          startTime: dateNow,
+          endTime: dateNow,
           frequncy: "once"
         }
       });
-    const onSubmit = data => console.log(data);
+    
+    const handleDate = (newValue) => {
+      setValue('date', newValue)
+    }
+    const handleStartTime = (newValue) => {
+      setValue('startTime', newValue)
+    }
+    const handleEndTime = (newValue) => {
+      setValue('endTime', newValue)
+    }
+
+    const onSubmit = data => {
+      dataWebsite.data = {
+        date: shortDate(data.date),
+        startTime: formatUTC(data.startTime),
+        endTime: formatUTC(data.endTime),
+        frequncy: frequncy
+      }
+      close()
+    };
 
     const close = () => OnSubscribeSelect(undefined)
 
     return (<>
       <Dialog
       fullWidth
-        open={data.open}
+        open={dataWebsite.open}
         className='dialog'
         onClose={close}
         // onClose={handleClose}
@@ -35,7 +59,7 @@ export const SubscribeDialog = ({data, OnSubscribeSelect}) => {
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
           Subscribe
         </DialogTitle>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className='minus-margin-top-sx' onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Controller
@@ -45,8 +69,9 @@ export const SubscribeDialog = ({data, OnSubscribeSelect}) => {
                     <MobileDatePicker
                         {...field}
                         label="choose date"
+                        onChange={handleDate}
                         inputFormat="MM/dd/yyyy"
-                        value={new Date()}
+                        value={getValues('date')}
                         renderInput={(params) => <TextField {...params} />}
                         />
                         </>}/>
@@ -58,7 +83,8 @@ export const SubscribeDialog = ({data, OnSubscribeSelect}) => {
                     <TimePicker
                     {...field}
                     label="choose start time"
-                    value={new Date()}
+                    value={getValues('startTime')}
+                    onChange={handleStartTime}
                     renderInput={(params) => <TextField {...params} />}
                 /> </>} />
                 <Controller
@@ -68,26 +94,24 @@ export const SubscribeDialog = ({data, OnSubscribeSelect}) => {
                         <TimePicker
                         {...field}
                         label="choose end time"
-                        value={new Date()}
+                        value={getValues('endTime')}
+                        onChange={handleEndTime}
                         renderInput={(params) => <TextField {...params} />}
                         /> </>} />
             </LocalizationProvider>
-            <Controller
-                name='frequncy'
-                control={control}
-                render = {({field}) => <>
-                        <FormControl {...field}>
-                            <FormLabel id="demo-radio-buttons-group-label">Frequncy</FormLabel>
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="female"
-                                name="radio-buttons-group"
-                            >
-                                <FormControlLabel value="once" control={<Radio />} label="Once" />
-                                <FormControlLabel value="evrey" control={<Radio />} label="Evrey week" />
-                            </RadioGroup>
-                        </FormControl> </> } /> 
-           
+            <FormControl>
+          <FormLabel id="demo-controlled-radio-buttons-group">Frequncy</FormLabel>
+          <RadioGroup
+            row 
+            aria-labelledby="demo-controlled-radio-buttons-group"
+            name="controlled-radio-buttons-group"
+            value={frequncy}
+            onChange={handleChange}
+          >
+            <FormControlLabel value={false} control={<Radio />} label="Once" />
+            <FormControlLabel value={true} control={<Radio />} label="Evrey Week" />
+          </RadioGroup>
+        </FormControl>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={close}>

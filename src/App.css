@@ -16,7 +16,6 @@
 }
 
 
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -46,8 +45,17 @@
   margin-top: 2% !important;
 }
 
+.minus-margin-top-sx {
+  margin-top: -6% !important;
+  overflow: hidden;
+}
+
 .space-between {
   justify-content: space-between !important;
+}
+
+.left {
+  left: 70% !important;
 }
 
 .margin-sx {

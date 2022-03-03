@@ -2,7 +2,7 @@ const { default: ApiCore, HTTPMethod } = require("./ApiCore");
 
 class AuthApi {
     login(username, password) {
-        return ApiCore.fetch('/login', HTTPMethod.POST, {
+        return ApiCore.fetch('/signin', HTTPMethod.POST, {
             email: username,
             password: password
         })
@@ -15,10 +15,19 @@ class AuthApi {
         })
     }
 
-    signup(username, password) {
+    signup(username, password, name, phone) {
         return ApiCore.fetch('/signup', HTTPMethod.POST, {
             email: username,
-            password: password
+            password: password,
+            name: name,
+            phone: phone
+        })
+    }
+    createUser(username, name, phone) {
+        return ApiCore.fetch('/createUser', HTTPMethod.POST, {
+            email: username,
+            name: name,
+            phone: phone
         })
     }
 
@@ -31,11 +40,7 @@ class AuthApi {
     // }
 
     getUser() {
-        return ApiCore.fetch('/getUser', HTTPMethod.GET)
-    }
-
-    getUsers() {
-        return ApiCore.fetch('/getUsers', HTTPMethod.GET)
+        return ApiCore.fetch('/users/getUser', HTTPMethod.GET)
     }
 }
 
