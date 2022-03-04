@@ -3,16 +3,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import MailIcon from '@mui/icons-material/Mail';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Background from './green-gddce8047d_640.jpg'
 import { SessionContextStore } from '../../context/SessionContext';
+import { InputAdornment } from '@mui/material';
 
 
 export const Login = () => {
@@ -33,7 +32,7 @@ export const Login = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${Background})`,
+            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/courtney-cook-SsIIw_MET0E-unsplash.jpg?alt=media&token=a677d4a6-8ac8-45c6-9246-4da2c8b9caf6)`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

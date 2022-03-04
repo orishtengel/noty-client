@@ -2,7 +2,6 @@ import React from 'react'
 import { AppBar, Avatar, Box, Button, Container, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import FlexView from 'react-flexview/lib'
 import './AppBar.css'
-import Image from './labor-day-g33a7e1df1_640.jpg'
 import { SessionContextStore } from '../../context/SessionContext';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -13,6 +12,7 @@ import SessionService from '../../services/SessionService'
 
 export const AppBarNoty = () => {
     const sessionContext = React.useContext(SessionContextStore)
+    console.log(sessionContext)
     const [menuOpen,setMenuOpen] = React.useState(false)
 
     const openMenu = () => {
@@ -22,7 +22,10 @@ export const AppBarNoty = () => {
     const closeMenu = () => {
         setMenuOpen(false)
     } 
-        
+
+    const logout = () => {
+      sessionContext.logout()
+    }
 
     return (<>
      <Box sx={{ flexGrow: 1 }}>
@@ -36,12 +39,12 @@ export const AppBarNoty = () => {
             sx={{ mr: 2 }}
             onClick={openMenu}
           >
-            <MenuIcon />
+            <MenuIcon style={{color:'white'}} />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography style={{color:'white'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Logo
           </Typography>
-          <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.user)}</Avatar>
+          <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.name)}</Avatar>
         </Toolbar>
       </AppBar>
     </Box>
@@ -52,7 +55,7 @@ export const AppBarNoty = () => {
                 <FlexView column hAlignContent='center'>
                      <Avatar sx={{bgcolor:'#0b5b3c'}} size={90} color={'#ff9234'} style={{borderWidth: "2px", color: 'white', border:'solid'}} />
                      <br/>
-                    <div style={{color: 'white', fontWeight: 'bold', fontSize: '1.3em', textTransform: 'capitalize'}}>{sessionContext.user?.name}</div>
+                    <div style={{color: 'white', fontWeight: 'bold', fontSize: '1.3em', textTransform: 'capitalize'}}>{sessionContext.name}</div>
                 </FlexView>
                 <br/>
                 <Divider  className="white-divdier" />
@@ -65,7 +68,7 @@ export const AppBarNoty = () => {
                     <ListItemText style={{color: 'white'}} primary={"My subscribes"} />
                 </ListItem>}
                 {SessionService.isLoggedIn() && 
-                <ListItem button >
+                <ListItem button onClick={logout} >
                     <ListItemIcon><LogoutIcon color="secondary" /></ListItemIcon>
                     <ListItemText style={{color: 'white'}} primary={"Logout"} />
                 </ListItem>}

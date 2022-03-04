@@ -1,4 +1,4 @@
-import {Button, CardActions, Typography } from '@mui/material'
+import {Button, CardActions, Container, Grid, Typography } from '@mui/material'
 import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { SubscribeDialog } from '../subscribe_dialog/SubscibeDialog';
 import './CardWebsite.css'
 import { SubscribeContextStore } from '../../context/SubscribeContext';
+import FlexView from 'react-flexview/lib';
 
 
 export const CardWebsite = ({email, appdata}) => {
@@ -17,10 +18,15 @@ export const CardWebsite = ({email, appdata}) => {
     const openDialog = () => {
         setDialogData({open: true, data: dialogData})
     }
-    const subscibeSelect = () => {
-        subscribeContext.addSubscribe(keyWebsite[0], email, dialogData.data.date, dialogData.data.startTime, 
-          dialogData.data.endTime, dialogData.data.frequncy)
+    const subscibeSelect = (data) => {
+      if(data) {
+        subscribeContext.addSubscribe(keyWebsite[0], data.email, data.date, data.startTime, 
+          data.endTime, data.frequncy)
         setDialogData({open: false, data: dialogData})
+      }
+      else {
+        setDialogData({open: false, data: dialogData})
+      }
     }
     
 
@@ -33,16 +39,24 @@ export const CardWebsite = ({email, appdata}) => {
         alt="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Course
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         {appdata[keyWebsite].name}
-        </Typography>
+        <Grid container spacing={1}>
+          <Grid item xs={8} md={8} >
+              <FlexView column>
+                <Typography gutterBottom variant="h5" component="div">
+                  Course
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                {appdata[keyWebsite].name}
+                </Typography>
+              </FlexView>
+          </Grid>
+          <Grid item xs={4} md={4}>
+            <FlexView >
+              <Button className='left initial top-lg' variant='outlined' onClick={openDialog} size="small">Subscribe</Button>
+            </FlexView>
+          </Grid>
+        </Grid>
       </CardContent>
-      <CardActions>
-        <Button className='left' variant='outlined' onClick={openDialog} size="small">Subscribe</Button>
-      </CardActions>
     </Card>
     <SubscribeDialog dataWebsite={dialogData} OnSubscribeSelect={subscibeSelect}/>
 

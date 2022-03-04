@@ -1,6 +1,7 @@
 import { Alert, Stack } from '@mui/material'
 import React from 'react'
 import SubscribeApi from '../api/SubscribeApi'
+import EventBus from '../eventbus/EventBus'
 
 const defaultState = {
     keyWebsite: '',
@@ -32,11 +33,11 @@ const SubscribeContext = (props) => {
         const resp = await SubscribeApi.addSubscribe(keyWebsite,username, date, startTime, endTime, frequncy)
         console.log(resp)
         if (resp.ok) {
-            return(<>
-                <Stack sx={{ width: '100%' }} spacing={2}>
-                  <Alert severity="success"> Subscribe successfully! </Alert>
-                </Stack>
-            </>)
+            EventBus.publish('SHOW_ALERT',"success,subscribe successfully")
+        }
+        else {
+            if(!resp.ok)
+                EventBus.publish('SHOW_ALERT',"error,error in subscribe")
         }
         return resp
     }

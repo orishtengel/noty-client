@@ -6,19 +6,19 @@ import 'firebase/auth'
 import AuthApi from '../api/AuthApi';
 import reactRouterDom from 'react-router-dom';
 import SessionService from '../services/SessionService';
+import EventBus from '../eventbus/EventBus';
 
 
 const defaultState = {
     email: '',
-    user: '',
+    name: '',
     phone: '',
-    color: ''
 }
 
 const reducer = (state, action) => {
     switch(action.type) {
         case 'SET_USER':
-            return {...state, email: action.data.email, user: action.data.user, phone:action.data.phone, color: action.data.color}
+            return {...state, email: action.data.email, name: action.data.name, phone:action.data.phone}
         default:
             return state;
     }
@@ -31,33 +31,53 @@ const SessionContext = (props) => {
     const history = useHistory()
 
     React.useEffect(() => {
-        loadUser()
+        if(ls.get('logged')) {
+            loadUser()
+        }
     },[])
 
     const login = async (username, password) => {
-        const resp = await firebase.auth().signInWithEmailAndPassword(username,password)
-        if(resp) {
-            const user = await AuthApi.getUser()
-            if (user) {
+        try {
+            const resp = await firebase.auth().signInWithEmailAndPassword(username,password)
+            if (resp) {
                 ls.set("token",await resp.user.getIdToken())
-                dispatch({type: 'SET_USER', data: { email: username, user: user.data.name, phone: user.data.phone, color:user.data.color }})
-                history.push('/')
+                const respUser = await AuthApi.getUser()
+                    if(respUser.ok) {
+                        ls.set("logged", true)
+                        dispatch({type: 'SET_USER', data: { email: username, name: respUser.data.data.name, phone: respUser.data.data.phone }})
+                        history.push('/')
+                    }
+                    else {
+                        ls.remove("token")
+                        EventBus.publish('SHOW_ALERT','error,user dont exist')
+                    }
+                }
             }
+        catch (err) {
+            if (err.code === 'auth/user-not-found')
+                EventBus.publish('SHOW_ALERT','error,user Unauthorized')
+            else 
+                history.push('/')
         }
-        return resp
     }
 
     const signup = async (username, password) => {
+        try {
         const resp = await firebase.auth().createUserWithEmailAndPassword(username,password)
         if(resp) {
-            ls.set('token', await resp.user.getIdToken())        }
+            ls.set('token', await resp.user.getIdToken())}
         return resp
+        }
+        catch (err) {
+            if (err.code === 'auth/email-already-in-use')
+                EventBus.publish('SHOW_ALERT','error,user already in use')
+        }
     }
 
     const createUser = async (username, name, phone) => {
         const resp = await AuthApi.createUser(username,name,phone)
         if(resp.ok) {
-            dispatch({type: 'SET_USER', data: { email: username, user: name, phone: phone }})
+            dispatch({type: 'SET_USER', data: { email: username, name: name, phone: phone }})
             history.push('/')
         }
         return resp
@@ -67,7 +87,7 @@ const SessionContext = (props) => {
         if(SessionService.isLoggedIn()) {
             let resp = await AuthApi.getUser()
             if (resp.ok) {
-                dispatch({type: 'SET_USER', data: { email: resp.data.email, user: resp.data }})
+                dispatch({type: 'SET_USER', data: { email: resp.data.email, name: resp.data.name }})
             }
         }
     }
@@ -75,7 +95,8 @@ const SessionContext = (props) => {
     const logout = () => {
         history.push('/login')
         ls.remove('token')
-        dispatch({type: 'SET_USER', data: { email:'', user: ''}})
+        ls.remove('logged')
+        dispatch({type: 'SET_USER', data: { email:'', name: '', phone:''}})
     }
 
 

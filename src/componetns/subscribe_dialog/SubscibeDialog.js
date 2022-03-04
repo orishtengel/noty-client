@@ -9,6 +9,7 @@ import {formatUTC, shortDate } from '../../services/dateUtils';
 import { TimePicker } from '@mui/lab';
 
 
+
 export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
     const dateNow = new Date()
     const [frequncy, setFrequncy] = React.useState(false);
@@ -42,14 +43,15 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
         endTime: formatUTC(data.endTime),
         frequncy: frequncy
       }
-      close()
+      OnSubscribeSelect(dataWebsite.data)
     };
 
     const close = () => OnSubscribeSelect(undefined)
 
     return (<>
       <Dialog
-      fullWidth
+        fullWidth
+        transi
         open={dataWebsite.open}
         className='dialog'
         onClose={close}

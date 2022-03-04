@@ -2,21 +2,21 @@ const { default: ApiCore, HTTPMethod } = require("./ApiCore");
 
 class AuthApi {
     login(username, password) {
-        return ApiCore.fetch('/signin', HTTPMethod.POST, {
+        return ApiCore.fetch('/auth/signin', HTTPMethod.POST, {
             email: username,
             password: password
         })
     }
     
     verifyToken(idToken, email) {
-        return ApiCore.fetch('/verify', HTTPMethod.POST, {
+        return ApiCore.fetch('/auth/verify', HTTPMethod.POST, {
             idToken: idToken,
             email: email
         })
     }
 
     signup(username, password, name, phone) {
-        return ApiCore.fetch('/signup', HTTPMethod.POST, {
+        return ApiCore.fetch('/auth/signup', HTTPMethod.POST, {
             email: username,
             password: password,
             name: name,
@@ -24,23 +24,21 @@ class AuthApi {
         })
     }
     createUser(username, name, phone) {
-        return ApiCore.fetch('/createUser', HTTPMethod.POST, {
+        return ApiCore.fetch('/auth/createUser', HTTPMethod.POST, {
             email: username,
             name: name,
             phone: phone
         })
     }
 
-    // facebookLogin(email, name, picture) {
-    //     return ApiCore.fetch('/facebookLogin', HTTPMethod.POST, {
-    //         email: email,
-    //         name: name,
-    //         picture: picture
-    //     })
-    // }
-
     getUser() {
         return ApiCore.fetch('/users/getUser', HTTPMethod.GET)
+    }
+
+    getUserByEmail(email) {
+        return ApiCore.fetch('/users/getUserByEmail', HTTPMethod.POST, {
+            email: email
+        })
     }
 }
 

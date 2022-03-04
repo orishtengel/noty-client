@@ -9,13 +9,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
-import Background from './courtney-cook-h7aVq-7FfPw-unsplash.jpg'
 import { useForm, Controller } from 'react-hook-form'
 import { SessionContextStore } from '../../context/SessionContext';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import FlexView from 'react-flexview/lib';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
+import './Signup.css'
 
 
 const theme = createTheme();
@@ -48,7 +48,7 @@ export const Signup = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:`url(${Background})`,
+            backgroundImage:`url(https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/mick-haupt-m0iXio5FF7M-unsplash.jpg?alt=media&token=3ff6f0d4-4c38-49f9-b77d-81311550ae1d)`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -121,6 +121,7 @@ export const Signup = () => {
                   name="phone"
                   control={control}
                   render={({ field }) => <PhoneInput
+                                          className='phonePicker'
                                           placeholder="Enter phone number"
                                           country={'us'}
                                           required
