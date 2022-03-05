@@ -51,7 +51,7 @@ function App() {
             <ApplicationsContext>
               <AppBarNoty/>
               <SubscribeContext>
-              <HomeScreen/>
+                <HomeScreen/>
               </SubscribeContext>
             </ApplicationsContext>
           </LoginProtectedRoute>

@@ -31,10 +31,10 @@ export const CardWebsite = ({email, appdata}) => {
     
 
     return(<>
-     <Card >
+     <Card elevation={4}>
       <CardMedia
         component="img"
-        height="140"
+        height="300"
         image={appdata[keyWebsite].picture}
         alt="green iguana"
       />

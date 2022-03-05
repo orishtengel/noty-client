@@ -70,7 +70,7 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                 render={({field}) => <>
                     <MobileDatePicker
                         {...field}
-                        label="choose date"
+                        label="Date"
                         onChange={handleDate}
                         inputFormat="MM/dd/yyyy"
                         value={getValues('date')}
@@ -84,7 +84,7 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                 render = {({field}) => <>
                     <TimePicker
                     {...field}
-                    label="choose start time"
+                    label="Start time"
                     value={getValues('startTime')}
                     onChange={handleStartTime}
                     renderInput={(params) => <TextField {...params} />}
@@ -95,14 +95,14 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                     render = {({field}) => <>
                         <TimePicker
                         {...field}
-                        label="choose end time"
+                        label="End time"
                         value={getValues('endTime')}
                         onChange={handleEndTime}
                         renderInput={(params) => <TextField {...params} />}
                         /> </>} />
             </LocalizationProvider>
             <FormControl>
-          <FormLabel id="demo-controlled-radio-buttons-group">Frequncy</FormLabel>
+          <FormLabel id="demo-controlled-radio-buttons-group">Frequency</FormLabel>
           <RadioGroup
             row 
             aria-labelledby="demo-controlled-radio-buttons-group"
@@ -111,7 +111,7 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
             onChange={handleChange}
           >
             <FormControlLabel value={false} control={<Radio />} label="Once" />
-            <FormControlLabel value={true} control={<Radio />} label="Evrey Week" />
+            <FormControlLabel value={true} control={<Radio />} label="Every Week" />
           </RadioGroup>
         </FormControl>
         </DialogContent>

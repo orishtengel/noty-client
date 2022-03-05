@@ -42,7 +42,7 @@ export const AppBarNoty = () => {
             <MenuIcon style={{color:'white'}} />
           </IconButton>
           <Typography style={{color:'white'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Logo
+            Home
           </Typography>
           <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.name)}</Avatar>
         </Toolbar>
@@ -65,7 +65,7 @@ export const AppBarNoty = () => {
             {SessionService.isLoggedIn() && 
                 <ListItem button>
                     <ListItemIcon><InventoryIcon color="secondary" /></ListItemIcon>
-                    <ListItemText style={{color: 'white'}} primary={"My subscribes"} />
+                    <ListItemText style={{color: 'white'}} primary={"My Subscriptions"} />
                 </ListItem>}
                 {SessionService.isLoggedIn() && 
                 <ListItem button onClick={logout} >
