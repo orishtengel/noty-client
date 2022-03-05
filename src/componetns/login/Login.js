@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { SessionContextStore } from '../../context/SessionContext';
-import { InputAdornment } from '@mui/material';
+import { InputAdornment, useMediaQuery } from '@mui/material';
 
 
 export const Login = () => {
@@ -28,7 +28,7 @@ export const Login = () => {
         <CssBaseline />
         <Grid
           item
-          xs={false}
+          xs={12}
           sm={4}
           md={7}
           sx={{
