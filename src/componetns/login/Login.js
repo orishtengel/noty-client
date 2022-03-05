@@ -10,8 +10,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import './Login.css'
 import { SessionContextStore } from '../../context/SessionContext';
-import { InputAdornment, useMediaQuery } from '@mui/material';
+import { Container, InputAdornment, useMediaQuery } from '@mui/material';
+import FlexView from 'react-flexview/lib';
 
 
 export const Login = () => {
@@ -28,7 +30,7 @@ export const Login = () => {
         <CssBaseline />
         <Grid
           item
-          xs={12}
+          xs={false}
           sm={4}
           md={7}
           sx={{
@@ -40,8 +42,8 @@ export const Login = () => {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className='box-xs'>
+          <Box 
             sx={{
               my: 8,
               mx: 4,
@@ -95,7 +97,7 @@ export const Login = () => {
                     Forgot password?
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item >
                   <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>

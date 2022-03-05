@@ -27,6 +27,16 @@
   color: white;
 }
 
+/* .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12{
+  height: 27% !important;
+}
+.MuiGrid-grid-xs-12 {
+  margin-top: 38% !important;
+      position: absolute !important;
+      height: 100% !important;
+      border-radius: 4% !important;
+  } */
+
 .App-link {
   color: #61dafb;
 }
