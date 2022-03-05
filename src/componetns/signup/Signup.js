@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
+import { useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -20,8 +21,7 @@ import './Signup.css'
 
 const theme = createTheme();
 
-export const Signup = () => {
-
+const SignupForm = () => {
     const sessionContext = React.useContext(SessionContextStore)
     const [token, setToken] = React.useState('')
     const { control, handleSubmit } = useForm({
@@ -39,7 +39,131 @@ export const Signup = () => {
        sessionContext.createUser(email, name, phone)
     }
 
-  return (<>
+    return <Box
+        sx={{
+          my: 8,
+          mx: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
+    <Avatar sx={{ m: 1 , bgcolor:'primary.main'}}>
+      <PermContactCalendarIcon color='white' />
+    </Avatar>
+    <Typography component="h1" variant="h5">
+      Sign Up
+    </Typography>
+    <form onSubmit={handleSubmit(onSubmit)}>
+    <Controller
+        name="email"
+        control={control}
+        render={({ field }) => <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                {...field}
+                            /> } />
+    <FlexView >
+      <Controller
+          name="firstname"
+          control={control}
+          render={({ field }) => <TextField
+                                  margin="normal"
+                                  required
+                                  fullWidth
+                                  id="firstname"
+                                  label="First Name"
+                                  name="firstname"
+                                  autoComplete="firstname"
+                                  autoFocus
+                                  {...field}
+                              /> } />
+      <Controller
+          name="lastname"
+          control={control}
+          render={({ field }) => <TextField
+                                  margin="normal"
+                                  required
+                                  fullWidth
+                                  id="lastname"
+                                  label="Last Name"
+                                  name="lastname"
+                                  autoComplete="lastname"
+                                  autoFocus
+                                  {...field}
+                              /> } />
+    </FlexView>
+    <Controller
+          name="phone"
+          control={control}
+          render={({ field }) => <PhoneInput
+                                  className='phonePicker'
+                                  placeholder="Enter phone number"
+                                  country={'us'}
+                                  required
+                                  {...field}
+                              /> } />
+    <Controller 
+        name='password'
+        control={control}
+        render = {({field}) => <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                {...field}
+                            /> }/>
+      <Button
+        onClick={signup}
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
+        Sign Up
+      </Button>
+      </form>
+      <Grid container>
+        <Grid item xs>
+          <Link href="#" variant="body2">
+            Forgot password?
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="/login" variant="body2">
+            {"Already have account? Sign in"}
+          </Link>
+        </Grid>
+      </Grid>
+    </Box>
+}
+
+export const Signup = () => {
+
+  const isMobile = !useMediaQuery('(min-width:600px)');
+
+
+  return isMobile ? <div>
+      <img 
+        src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/mick-haupt-m0iXio5FF7M-unsplash.jpg?alt=media&token=3ff6f0d4-4c38-49f9-b77d-81311550ae1d"}
+        height={300}
+        width={'100%'} 
+        />
+        
+      <Paper elevation={0} style={{marginTop: '-6vh', borderRadius: 50, position: 'absolute'}}>
+        <SignupForm />
+      </Paper>
+
+    </div> : (<>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -57,113 +181,7 @@ export const Signup = () => {
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1 , bgcolor:'primary.main'}}>
-              <PermContactCalendarIcon color='white' />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign Up
-            </Typography>
-            <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-                name="email"
-                control={control}
-                render={({ field }) => <TextField
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        id="email"
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="email"
-                                        autoFocus
-                                        {...field}
-                                    /> } />
-            <FlexView >
-              <Controller
-                  name="firstname"
-                  control={control}
-                  render={({ field }) => <TextField
-                                          margin="normal"
-                                          required
-                                          fullWidth
-                                          id="firstname"
-                                          label="First Name"
-                                          name="firstname"
-                                          autoComplete="firstname"
-                                          autoFocus
-                                          {...field}
-                                      /> } />
-              <Controller
-                  name="lastname"
-                  control={control}
-                  render={({ field }) => <TextField
-                                          margin="normal"
-                                          required
-                                          fullWidth
-                                          id="lastname"
-                                          label="Last Name"
-                                          name="lastname"
-                                          autoComplete="lastname"
-                                          autoFocus
-                                          {...field}
-                                      /> } />
-            </FlexView>
-            <Controller
-                  name="phone"
-                  control={control}
-                  render={({ field }) => <PhoneInput
-                                          className='phonePicker'
-                                          placeholder="Enter phone number"
-                                          country={'us'}
-                                          required
-                                          {...field}
-                                      /> } />
-            <Controller 
-                name='password'
-                control={control}
-                render = {({field}) => <TextField
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="password"
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="current-password"
-                                        {...field}
-                                    /> }/>
-              <Button
-                onClick={signup}
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
-              </form>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    {"Already have account? Sign in"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
+          <SignupForm />
         </Grid>
       </Grid>
     

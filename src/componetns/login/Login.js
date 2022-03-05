@@ -16,7 +16,7 @@ import { Container, InputAdornment, useMediaQuery } from '@mui/material';
 import FlexView from 'react-flexview/lib';
 
 
-export const Login = () => {
+const LoginForm = () => {
   const sessionContext = React.useContext(SessionContextStore)
 
   const handleSubmit = (event) => {
@@ -25,33 +25,14 @@ export const Login = () => {
     sessionContext.login(data.get('email'), data.get('password'))
   };
 
-  return (
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/courtney-cook-SsIIw_MET0E-unsplash.jpg?alt=media&token=a677d4a6-8ac8-45c6-9246-4da2c8b9caf6)`,
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className='box-xs'>
-          <Box 
+  return <Box 
             sx={{
               my: 8,
               mx: 4,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-            }}
-          >
+            }}>
             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
               <AccountCircleIcon />
             </Avatar>
@@ -99,12 +80,46 @@ export const Login = () => {
                 </Grid>
                 <Grid item >
                   <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
             </Box>
           </Box>
+}
+
+export const Login = () => {
+  const isMobile = !useMediaQuery('(min-width:600px)');
+
+  return isMobile ? <div>
+    <img 
+      src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/courtney-cook-SsIIw_MET0E-unsplash.jpg?alt=media&token=a677d4a6-8ac8-45c6-9246-4da2c8b9caf6"}
+      height={300}
+      width={'100%'} 
+      />
+      
+    <Paper elevation={0} style={{marginTop: '-6vh', borderRadius: 50, position: 'absolute'}}>
+      <LoginForm />
+    </Paper>
+
+  </div> : (
+    <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/courtney-cook-SsIIw_MET0E-unsplash.jpg?alt=media&token=a677d4a6-8ac8-45c6-9246-4da2c8b9caf6)`,
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className='box-xs'>
+          <LoginForm />
         </Grid>
       </Grid>
   );
