@@ -19,8 +19,11 @@ import { LoginProtectedRoute } from './services/LoginProtectedRoute';
 import { AppBarNoty } from './componetns/appbar/AppBarNoty';
 import ApplicationsContext, { ApplicationsContextStore } from './context/ApplicationsContext';
 import SubscribeContext from './context/SubscribeContext';
+import SubscribesContext from './context/SubscribesContext';
+
 import { LoadingScreen } from './componetns/loading/LoadingScreen';
 import { Alerts } from './componetns/alerts/Alerts';
+import { SubscribeScreen } from './componetns/subscribe_screen/SubscribeScreen';
 
 const theme = createTheme({
   palette: {
@@ -47,14 +50,19 @@ function App() {
           <Route path="/signup">
             <Signup/>
           </Route>
-          <LoginProtectedRoute path="/">
             <ApplicationsContext>
               <AppBarNoty/>
-              <SubscribeContext>
-                <HomeScreen/>
-              </SubscribeContext>
+              <SubscribesContext>
+                <SubscribeContext>
+                <LoginProtectedRoute path="/">
+                  <HomeScreen/>
+                </LoginProtectedRoute>
+                <LoginProtectedRoute path="/MySubscribe">
+                  <SubscribeScreen/>
+                </LoginProtectedRoute>
+                </SubscribeContext>
+              </SubscribesContext>
             </ApplicationsContext>
-          </LoginProtectedRoute>
         </Switch>
       </SessionContext>
     </Router>

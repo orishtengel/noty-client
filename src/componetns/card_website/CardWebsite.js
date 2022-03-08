@@ -9,18 +9,16 @@ import { SubscribeContextStore } from '../../context/SubscribeContext';
 import FlexView from 'react-flexview/lib';
 
 
-export const CardWebsite = ({email, appdata}) => {
-
+export const CardWebsite = ({idWebsite, appdata}) => {
     const [dialogData, setDialogData] = React.useState({open: false , data : {}})
     const subscribeContext = React.useContext(SubscribeContextStore)
-    const keyWebsite = Object.keys(appdata)
 
     const openDialog = () => {
         setDialogData({open: true, data: dialogData})
     }
     const subscibeSelect = (data) => {
       if(data) {
-        subscribeContext.addSubscribe(keyWebsite[0], data.email, data.date, data.startTime, 
+        subscribeContext.addSubscribe(idWebsite, data.email, data.date, data.startTime, 
           data.endTime, data.frequncy)
         setDialogData({open: false, data: dialogData})
       }
@@ -35,7 +33,7 @@ export const CardWebsite = ({email, appdata}) => {
       <CardMedia
         component="img"
         height="300"
-        image={appdata[keyWebsite].picture}
+        image={appdata.picture}
         alt="green iguana"
       />
       <CardContent>
@@ -46,7 +44,7 @@ export const CardWebsite = ({email, appdata}) => {
                   Course
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                {appdata[keyWebsite].name}
+                {appdata.name}
                 </Typography>
               </FlexView>
           </Grid>

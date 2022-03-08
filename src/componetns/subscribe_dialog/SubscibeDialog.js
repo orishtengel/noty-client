@@ -77,7 +77,6 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                         renderInput={(params) => <TextField {...params} />}
                         />
                         </>}/>
-
                 <Controller
                 name="startTime"
                 control={control}

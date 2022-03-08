@@ -14,6 +14,10 @@
  .gradient {
      background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
  }
+
+ .gradient_appbar {
+    background: linear-gradient(to left, #519259, #064635);
+ }
  
  .h2 {
      color: green;

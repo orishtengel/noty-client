@@ -6,7 +6,7 @@ import SessionService from '../services/SessionService'
 export const LoginProtectedRoute = ({children, ...rest}) => {
 
     return (
-        <Route {...rest}
+        <Route exact {...rest}
           render={({ location }) => SessionService.isLoggedIn() ? (children) : (
               <Redirect
                 to={{

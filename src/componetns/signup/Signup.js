@@ -155,7 +155,7 @@ export const Signup = () => {
   return isMobile ? <div>
       <img 
         src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/mick-haupt-m0iXio5FF7M-unsplash.jpg?alt=media&token=3ff6f0d4-4c38-49f9-b77d-81311550ae1d"}
-        height={300}
+        height={190}
         width={'100%'} 
         />
         

@@ -2,13 +2,13 @@ import React from 'react'
 import ApplicationsApi from '../api/ApplicationsApi'
 
 const defaultState = {
-    applications : []
+    applications : ''
 }
 
 const reducer = (state, action) => {
     switch(action.type) {
         case 'SET_APPLICATIONS':
-            return {...state , applications: [...state.applications, action.data.applications]}
+            return {...state , applications: action.data.applications}
         default:
             return state
     }
@@ -26,6 +26,7 @@ const ApplicationsContext = (props) => {
         }
         return resp
     }
+    
     return (
         <ApplicationsContextStore.Provider value={{...state, dispatch, loadApplications}}>
             {props.children}

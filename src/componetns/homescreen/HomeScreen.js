@@ -15,15 +15,16 @@ export const HomeScreen = () => {
         applcationContext.loadApplications()
     },[])
 
+    console.log(applcationContext.applications)
 
     return(<>
     <Container className='margin-top-sx'>
         <Grid container spacing={3}>
-            {applcationContext.applications.map((app,i) => {
+            {applcationContext.applications ? Object.keys(applcationContext.applications).map((app,i) => {
                 return  <Grid key={i} item xs={12} md={4}>
-                <CardWebsite email = {sessionContext.email} appdata = {app}/>
+                <CardWebsite idWebsite = {app} appdata = {applcationContext.applications[app]}/>
              </Grid> 
-            })}
+            }) : <></>}
         </Grid>
     </Container>
     </>)

@@ -36,6 +36,12 @@ const SessionContext = (props) => {
         }
     },[])
 
+    // React.useEffect(() => {
+    //     if(ls.get('logged')) {
+    //         loadUser()
+    //     }
+    // },[state.email])
+
     const login = async (username, password) => {
         try {
             const resp = await firebase.auth().signInWithEmailAndPassword(username,password)
@@ -98,7 +104,6 @@ const SessionContext = (props) => {
         ls.remove('logged')
         dispatch({type: 'SET_USER', data: { email:'', name: '', phone:''}})
     }
-
 
     return (
         <SessionContextStore.Provider value={{...state, dispatch, login, signup, logout,createUser}}>

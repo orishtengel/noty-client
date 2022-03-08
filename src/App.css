@@ -14,7 +14,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.gradient {
+  background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
+}
 
 .App-header {
   background-color: #282c34;

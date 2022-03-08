@@ -4,18 +4,18 @@ import SubscribeApi from '../api/SubscribeApi'
 import EventBus from '../eventbus/EventBus'
 
 const defaultState = {
-    keyWebsite: '',
+    idWebsite: '',
     username: '',
     date: '',
     startTime:'',
     endTime: '',
-    frequncy:''
+    frequncy:'',
 }
 
 const reducer = (state, action) => {
     switch(action.type) {
         case 'SET_SUBSCRIBE':
-            return {...state , keyWebsite: action.data.keyWebsite, 
+            return {...state , idWebsite: action.data.idWebsite, 
                                username: action.data.username, date: action.data.date,
                                startTime: action.data.startTime,
                                endTime: action.data.endTime, frequncy: action.data.frequncy}
@@ -27,13 +27,14 @@ const reducer = (state, action) => {
 export const SubscribeContextStore = React.createContext(defaultState)
 
 const SubscribeContext = (props) => {
+    
     const [state,dispatch] = React.useReducer(reducer,defaultState)
-
-    const addSubscribe = async (keyWebsite, username, date ,startTime, endTime, frequncy) => {
-        const resp = await SubscribeApi.addSubscribe(keyWebsite,username, date, startTime, endTime, frequncy)
-        console.log(resp)
+    const addSubscribe = async (idWebsite, username, date ,startTime, endTime, frequncy) => {
+        
+        const resp = await SubscribeApi.addSubscribe(idWebsite,username, date, startTime, endTime, frequncy)
+        
         if (resp.ok) {
-            EventBus.publish('SHOW_ALERT',"success,subscribe successfully")
+            EventBus.publish('SHOW_ALERT',"success, subscribe successfully")
         }
         else {
             if(!resp.ok)
@@ -41,6 +42,7 @@ const SubscribeContext = (props) => {
         }
         return resp
     }
+
     return (
         <SubscribeContextStore.Provider value={{...state, dispatch, addSubscribe}}>
             {props.children}

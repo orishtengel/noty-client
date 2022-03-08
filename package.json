@@ -16,6 +16,7 @@
     "axios": "^0.26.0",
     "date-fns": "^2.28.0",
     "dayjs": "^1.10.8",
+    "dayjs-plugin-utc": "^0.1.2",
     "firebase": "^8.10.1",
     "jwt-decode": "^3.1.2",
     "local-storage": "^2.0.0",
