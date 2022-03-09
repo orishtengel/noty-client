@@ -34,10 +34,10 @@ const SubscribesContext = (props) => {
         await Promise.all(apps.map(async id => {
             const resp = await SubscribeApi.getSubscribeById(id)
             if(resp.ok) {
-                arr.push(resp.data.data)
+                arr.push(...Object.keys(resp.data.data).map(k => resp.data.data[k]))
             }
         }))
-
+        
         dispatch({type: 'LOAD_SUBSCRIBES', data : { subscribes:  arr }})
     }
     const deleteSubscribe = async (idWebsite, idSubscribe) => {
