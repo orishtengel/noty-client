@@ -18,7 +18,6 @@ class SubscribeApi {
     }
    
     async deleteSubscribe(idWebsite, idSubscribe) {
-        console.log(idWebsite)
         return await ApiCore.fetch('/apps/deleteSubscribe', HTTPMethod.POST, {
             idWebsite: idWebsite,
             idSubscribe: idSubscribe

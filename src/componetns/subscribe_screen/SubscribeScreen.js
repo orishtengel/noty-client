@@ -13,23 +13,24 @@ import EventBus from '../../eventbus/EventBus';
 export const SubscribeScreen = () => { 
     const subscribesContext = React.useContext(SubscribesContextStore)
     const applcationContext = React.useContext(ApplicationsContextStore)
+    const [localState, setLocalSubscribe] = React.useState('')
 
     React.useEffect(() => {
-        Object.keys(applcationContext.applications).map(app => {
-            subscribesContext.getSubscribesById(app)
+        Object.keys(applcationContext.applications).map(async app => {
+            await subscribesContext.getSubscribesById(app)
         })
     },[])
 
-    // React.useEffect(() => {
-    //     Object.keys(applcationContext.applications).map(app => {
-    //         subscribesContext.getSubscribesById(app)
-    //     })
-    // },[subscribesContext.subscribes])
+    React.useEffect(() => {
+        Object.keys(applcationContext.applications).map(async app => {
+            await subscribesContext.getSubscribesById(app)
+        })
+    },[localState])
 
     const deleteSubscribe = async (idWebsite, idSubscribe) => {
-        console.log(idWebsite)
         let resp = await subscribesContext.deleteSubscribe(idWebsite, idSubscribe)
         if (resp) {
+            setLocalSubscribe(uuidv4())
             EventBus.publish('SHOW_ALERT','success,delete successfully')
         }
         else {

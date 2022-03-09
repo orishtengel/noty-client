@@ -15,7 +15,6 @@ export const HomeScreen = () => {
         applcationContext.loadApplications()
     },[])
 
-    console.log(applcationContext.applications)
 
     return(<>
     <Container className='margin-top-sx'>

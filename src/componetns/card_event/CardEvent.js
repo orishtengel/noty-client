@@ -17,7 +17,6 @@ export const CardEvent = ({idSubscribe, dataCard, deleteSubscribe}) => {
 
   const theme = useTheme();
   const [dialogData, setDialogData] = React.useState({open: false})
-  console.log(dataCard)
   const openDialog = () => {
     setDialogData({open: true, data: dialogData})
   }

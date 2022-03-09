@@ -93,8 +93,8 @@ export const Login = () => {
 
   return isMobile ? <div>
     <img 
-      src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/courtney-cook-SsIIw_MET0E-unsplash.jpg?alt=media&token=a677d4a6-8ac8-45c6-9246-4da2c8b9caf6"}
-      height={200}
+      src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/overhead%20view%20golf%20course.svg?alt=media&token=76a023a2-2527-4afb-8df0-77e71fff47db"}
+      height={240}
       width={'100%'} 
       />
       

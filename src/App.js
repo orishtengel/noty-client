@@ -41,6 +41,7 @@ function App() {
   return (<>
   <ThemeProvider theme = {theme}>
     <Alerts />
+    <LoadingScreen/>
     <Router>
       <SessionContext>
         <Switch>

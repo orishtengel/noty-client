@@ -140,7 +140,7 @@ const SignupForm = () => {
         </Grid>
         <Grid item>
           <Link href="/login" variant="body2">
-            {"Already have account? Sign in"}
+            {"Sign in"}
           </Link>
         </Grid>
       </Grid>
@@ -154,7 +154,7 @@ export const Signup = () => {
 
   return isMobile ? <div>
       <img 
-        src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/mick-haupt-m0iXio5FF7M-unsplash.jpg?alt=media&token=3ff6f0d4-4c38-49f9-b77d-81311550ae1d"}
+        src={"https://firebasestorage.googleapis.com/v0/b/ezlinks-1b7b7.appspot.com/o/vecteezy_golf-background-hs0421_revisi.jpg?alt=media&token=4f1e10a3-ee1d-4e0d-8791-77e5ab16378c"}
         height={190}
         width={'100%'} 
         />

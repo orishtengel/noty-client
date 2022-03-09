@@ -31,9 +31,7 @@ const SessionContext = (props) => {
     const history = useHistory()
 
     React.useEffect(() => {
-        if(ls.get('logged')) {
-            loadUser()
-        }
+        loadUser()
     },[])
 
     // React.useEffect(() => {
@@ -91,9 +89,11 @@ const SessionContext = (props) => {
 
     const loadUser = async () => {
         if(SessionService.isLoggedIn()) {
+            console.log("dsadsa")
             let resp = await AuthApi.getUser()
+            console.log(resp)
             if (resp.ok) {
-                dispatch({type: 'SET_USER', data: { email: resp.data.email, name: resp.data.name }})
+                dispatch({type: 'SET_USER', data: { email: resp.data.data.email, name: resp.data.data.name }})
             }
         }
     }
