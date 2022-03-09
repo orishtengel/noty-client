@@ -31,7 +31,9 @@ const SessionContext = (props) => {
     const history = useHistory()
 
     React.useEffect(() => {
-        loadUser()
+        if(ls.get('logged')) {
+            loadUser()
+        }
     },[])
 
     // React.useEffect(() => {
@@ -53,13 +55,13 @@ const SessionContext = (props) => {
                     }
                     else {
                         ls.remove("token")
-                        EventBus.publish('SHOW_ALERT','error,user dont exist')
+                        EventBus.publish('SHOW_ALERT','error,User does not exist')
                     }
                 }
             }
         catch (err) {
             if (err.code === 'auth/user-not-found')
-                EventBus.publish('SHOW_ALERT','error,user Unauthorized')
+                EventBus.publish('SHOW_ALERT','error,Unauthorized user')
             else 
                 history.push('/')
         }
@@ -74,12 +76,13 @@ const SessionContext = (props) => {
         }
         catch (err) {
             if (err.code === 'auth/email-already-in-use')
-                EventBus.publish('SHOW_ALERT','error,user already in use')
+                EventBus.publish('SHOW_ALERT','error, Email already in use')
         }
     }
 
     const createUser = async (username, name, phone) => {
         const resp = await AuthApi.createUser(username,name,phone)
+        console.log(resp)
         if(resp.ok) {
             dispatch({type: 'SET_USER', data: { email: username, name: name, phone: phone }})
             history.push('/')

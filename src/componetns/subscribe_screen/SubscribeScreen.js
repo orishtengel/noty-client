@@ -31,10 +31,10 @@ export const SubscribeScreen = () => {
         let resp = await subscribesContext.deleteSubscribe(idWebsite, idSubscribe)
         if (resp) {
             setLocalSubscribe(uuidv4())
-            EventBus.publish('SHOW_ALERT','success,delete successfully')
+            EventBus.publish('SHOW_ALERT','success, You are now unsubscribed')
         }
         else {
-            EventBus.publish('SHOW_ALERT','erroe,error in delete')
+            EventBus.publish('SHOW_ALERT','erroe, Error in unsubscribing')
         }
     }
 

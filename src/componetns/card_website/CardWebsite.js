@@ -29,7 +29,7 @@ export const CardWebsite = ({idWebsite, appdata}) => {
     
 
     return(<>
-     <Card elevation={4}>
+     <Card elevation={4} style={{marginBottom:'15px'}}>
       <CardMedia
         component="img"
         height="300"

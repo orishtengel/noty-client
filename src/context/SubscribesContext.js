@@ -26,15 +26,14 @@ const reducer = (state, action) => {
 export const SubscribesContextStore = React.createContext(defaultState)
 
 const SubscribesContext = (props) => {
-    
     const [state,dispatch] = React.useReducer(reducer,defaultState)
+    console.log(state)
 
     const getSubscribesById = async (id) => {
         if (id) {
         const resp = await SubscribeApi.getSubscribeById(id)
             if(resp.ok) {
-                dispatch({type:'SET_IDWEBSITE', data: {idWebsite: id}})
-                dispatch({type: 'LOAD_SUBSCRIBES', data : {subscribes: resp.data.data, IdWebsite:id}})
+                dispatch({type: 'LOAD_SUBSCRIBES', data : {subscribes: resp.data.data , id:id}})
                 return resp
             }
         }
@@ -43,7 +42,7 @@ const SubscribesContext = (props) => {
         const resp = await SubscribeApi.deleteSubscribe(idWebsite, idSubscribe)
         if (resp.ok) {
             dispatch({type:'DELETE_SUBSCRIBE', data: {idSubscribe: idSubscribe}})
-            EventBus.publish('SHOW_ALERT',"success,subscribe delete successfully")
+            EventBus.publish('SHOW_ALERT',"success,You are now Unsubscribed")
         }
         else {
             if(!resp.ok)

@@ -34,11 +34,11 @@ const SubscribeContext = (props) => {
         const resp = await SubscribeApi.addSubscribe(idWebsite,username, date, startTime, endTime, frequncy)
         
         if (resp.ok) {
-            EventBus.publish('SHOW_ALERT',"success, subscribe successfully")
+            EventBus.publish('SHOW_ALERT',"success, You are now Subscribed")
         }
         else {
             if(!resp.ok)
-                EventBus.publish('SHOW_ALERT',"error,error in subscribe")
+                EventBus.publish('SHOW_ALERT',"error,Error in unsubscribing")
         }
         return resp
     }

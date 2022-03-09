@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site":"notinow",
     "public": "build",
     "ignore": [
       "firebase.json",
