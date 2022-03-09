@@ -29,14 +29,16 @@ const SubscribesContext = (props) => {
     const [state,dispatch] = React.useReducer(reducer,defaultState)
     console.log(state)
 
-    const getSubscribesById = async (id) => {
-        if (id) {
-        const resp = await SubscribeApi.getSubscribeById(id)
+    const getSubscriptions = async (apps) => {
+        const arr = []
+        await Promise.all(apps.map(async id => {
+            const resp = await SubscribeApi.getSubscribeById(id)
             if(resp.ok) {
-                dispatch({type: 'LOAD_SUBSCRIBES', data : {subscribes: resp.data.data , id:id}})
-                return resp
+                arr.push(resp.data.data)
             }
-        }
+        }))
+
+        dispatch({type: 'LOAD_SUBSCRIBES', data : { subscribes:  arr }})
     }
     const deleteSubscribe = async (idWebsite, idSubscribe) => {
         const resp = await SubscribeApi.deleteSubscribe(idWebsite, idSubscribe)
@@ -52,7 +54,7 @@ const SubscribesContext = (props) => {
     }
 
     return (
-        <SubscribesContextStore.Provider value={{...state, dispatch, deleteSubscribe, getSubscribesById}}>
+        <SubscribesContextStore.Provider value={{...state, dispatch, deleteSubscribe, getSubscriptions}}>
             {props.children}
         </SubscribesContextStore.Provider>
     )

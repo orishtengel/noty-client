@@ -15,22 +15,18 @@ export const SubscribeScreen = () => {
     const applcationContext = React.useContext(ApplicationsContextStore)
     const [localState, setLocalSubscribe] = React.useState('')
 
-    React.useEffect(() => {
-        Object.keys(applcationContext.applications).map(async app => {
-            await subscribesContext.getSubscribesById(app)
-        })
-    },[])
+    const loadSubscripitons = async () => {
+        await subscribesContext.getSubscriptions(Object.keys(applcationContext.applications))
+    }
 
     React.useEffect(() => {
-        Object.keys(applcationContext.applications).map(async app => {
-            await subscribesContext.getSubscribesById(app)
-        })
-    },[localState])
+        loadSubscripitons()
+    },[])
 
     const deleteSubscribe = async (idWebsite, idSubscribe) => {
         let resp = await subscribesContext.deleteSubscribe(idWebsite, idSubscribe)
         if (resp) {
-            setLocalSubscribe(uuidv4())
+            loadSubscripitons()
             EventBus.publish('SHOW_ALERT','success, You are now unsubscribed')
         }
         else {
