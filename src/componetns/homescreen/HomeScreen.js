@@ -25,6 +25,7 @@ export const HomeScreen = () => {
              </Grid> 
             }) : <></>}
         </Grid>
+        <br />
     </Container>
     </>)
 }
