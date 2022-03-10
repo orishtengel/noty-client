@@ -30,7 +30,7 @@ export const SubscribeScreen = () => {
     const deleteSubscribe = async (idWebsite, idSubscribe) => {
         let resp = await subscribesContext.deleteSubscribe(idWebsite, idSubscribe)
         if (resp) {
-            loadSubscripitons()
+            applcationContext.loadApplications()
             EventBus.publish('SHOW_ALERT','success, You are now unsubscribed')
         }
         else {
@@ -43,7 +43,8 @@ export const SubscribeScreen = () => {
         <Grid container spacing={3}>
             {subscribesContext.subscribes ? Object.keys(subscribesContext.subscribes).map((subscribe,i) => {
                 return <Grid key={i} item xs={12} md={6}> 
-                    <CardEvent idSubscribe={subscribe} dataCard = {subscribesContext.subscribes[subscribe]} deleteSubscribe={deleteSubscribe}/>
+                    {subscribesContext.subscribes[subscribe] && 
+                        <CardEvent idSubscribe={subscribesContext.subscribes[subscribe].subId} dataCard = {subscribesContext.subscribes[subscribe]} deleteSubscribe={deleteSubscribe}/> }
                 </Grid>
             }) : <><Container>
                     <Card style = {{marginTop:'10%'}}>

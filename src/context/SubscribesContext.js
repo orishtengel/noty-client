@@ -34,7 +34,10 @@ const SubscribesContext = (props) => {
         await Promise.all(apps.map(async id => {
             const resp = await SubscribeApi.getSubscribeById(id)
             if(resp.ok) {
-                arr.push(...Object.keys(resp.data.data).map(k => resp.data.data[k]))
+                arr.push(...Object.keys(resp.data.data).map(k => {
+                    return  {subId: k, ...resp.data.data[k]}
+                } 
+                ))
             }
         }))
         
