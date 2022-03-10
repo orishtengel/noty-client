@@ -20,8 +20,12 @@ export const SubscribeScreen = () => {
     }
 
     React.useEffect(() => {
+        applcationContext.loadApplications()
+    }, [])
+
+    React.useEffect(() => {
         loadSubscripitons()
-    },[])
+    },[applcationContext.applications])
 
     const deleteSubscribe = async (idWebsite, idSubscribe) => {
         let resp = await subscribesContext.deleteSubscribe(idWebsite, idSubscribe)
