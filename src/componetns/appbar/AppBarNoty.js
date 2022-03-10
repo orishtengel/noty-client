@@ -51,12 +51,11 @@ export const AppBarNoty = () => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
               onClick={openMenu}>
               <MenuIcon fontSize='inherit' style={{color:'white'}} />
             </IconButton>
             <img src={process.env.PUBLIC_URL + '/logo.png'} className="app-bar-logo" />
-            <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.name)}</Avatar>
+            <Avatar sx={{bgcolor: '#59A52C'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.name)}</Avatar>
           </FlexView>
         </Toolbar>
       </AppBar>
@@ -66,7 +65,7 @@ export const AppBarNoty = () => {
                 <br/>
                 <br/>
                 <FlexView column hAlignContent='center'>
-                     <Avatar sx={{bgcolor:'#0b5b3c'}} size={90} color={'#ff9234'} style={{borderWidth: "2px", color: 'white', border:'solid'}} />
+                     <Avatar sx={{bgcolor:'#59A52C'}} size={90} color={'#ff9234'} style={{borderWidth: "2px", color: 'white', border:'solid'}} />
                      <br/>
                     <div style={{color: 'white', fontWeight: 'bold', fontSize: '1.3em', textTransform: 'capitalize'}}>{sessionContext.name}</div>
                 </FlexView>
