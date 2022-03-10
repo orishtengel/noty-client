@@ -38,6 +38,12 @@ export default class ApiCore {
             let data = {}
             try {
                 let response = await fetch(fullUrl, requestParams)
+                if(response.status == 401) {
+                    ls.remove("token")
+                    ls.remove("logged")
+                    window.location.replace("/login")
+                    return { ok: false }
+                }
                 data.ok = response.ok
                 try {
                     data.data = await response.json()
