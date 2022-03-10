@@ -40,7 +40,7 @@ export const CardEvent = ({idSubscribe, dataCard, deleteSubscribe}) => {
             <Grid item xs={8} md={8}>
                 <Container>
                 <Typography variant="h6">
-                    Los Roblos Green
+                    {dataCard.courseName}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" component="div">
                     {dataCard ? getLtime(dataCard.startTime) : ""} - { dataCard ? getLtime(dataCard.endTime) : ""}
