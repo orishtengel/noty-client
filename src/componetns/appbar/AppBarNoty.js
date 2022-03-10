@@ -45,20 +45,19 @@ export const AppBarNoty = () => {
      <Box sx={{ flexGrow: 1 }}>
       <AppBar className='gradient_appbar' position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={openMenu}
-          >
-            <MenuIcon style={{color:'white'}} />
-          </IconButton>
-          <Typography style={{color:'white'}} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            
-          </Typography>
-          <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.name)}</Avatar>
+          <FlexView vAlignContent='center' style={{width: '100%', justifyContent: 'space-between'}}>          
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={openMenu}>
+              <MenuIcon fontSize='inherit' style={{color:'white'}} />
+            </IconButton>
+            <img src={process.env.PUBLIC_URL + '/logo.png'} className="app-bar-logo" />
+            <Avatar sx={{bgcolor: '#0b5b3c'}} size={90} color={'#219F94'} style={{borderWidth: "2px", color: 'white', border:'solid'}} >{getName(sessionContext.name)}</Avatar>
+          </FlexView>
         </Toolbar>
       </AppBar>
     </Box>
@@ -92,9 +91,9 @@ export const AppBarNoty = () => {
                     <ListItemText style={{color: 'white'}} primary={"Logout"} />
                 </ListItem>}
             </List>
-            </Drawer>
-         
 
+            <img src={process.env.PUBLIC_URL + '/logo.png'} className="app-sidebar-logo" />
+          </Drawer>
     </>)
 }
 
