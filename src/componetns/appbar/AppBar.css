@@ -12,5 +12,6 @@
 }
 
 .MuiPaper-root.MuiDrawer-paper {
-    background: linear-gradient(to bottom, #519259, #064635);
+    /* background: linear-gradient(to bottom, #519259, #064635); */
+    background: linear-gradient(to bottom, #5D6274, #2D354A);
 }

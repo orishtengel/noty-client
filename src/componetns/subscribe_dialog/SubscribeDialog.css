@@ -7,16 +7,18 @@
  
  .dialog{
      overflow:hidden;
-     background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
+     background: linear-gradient(#5D6274, #2D354A);
+     /* background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% ); */
      background-color: transparent;
  }
  
  .gradient {
-     background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% );
+    background: linear-gradient(#5D6274, #2D354A);
+     /* background: linear-gradient( 117deg,  rgba(123,216,96,1) 39.2%, rgba(255,255,255,1) 156.2% ); */
  }
 
  .gradient_appbar {
-    background: linear-gradient(to left, #519259, #064635);
+    background: linear-gradient(#5D6274, #2D354A);
  }
  
  .h2 {
