@@ -24,7 +24,7 @@ export const EraseDialog = ({data, OnEraseSelect}) => {
         <DialogContent>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close} autoFocus>No</Button>
+          <Button onClick={close}>No</Button>
           <Button onClick={erase}>Yes</Button>
         </DialogActions>
       </Dialog>
