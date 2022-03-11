@@ -4,7 +4,7 @@ import SubscribeApi from '../api/SubscribeApi'
 import EventBus from '../eventbus/EventBus'
 
 const defaultState = {
-    subscribes: ''
+    subscribes: []
 }
 
 const reducer = (state, action) => {

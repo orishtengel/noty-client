@@ -31,8 +31,8 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
       dataWebsite.data = {
         ...data,
         date: dayjs(data.date).format('MM/DD/YYYY'),
-        startTime: `${dayjs(data.date).format('MM/DD/YYYY')} ${dayjs(data.startTime).format('HH:MM')}`,
-        endTime: `${dayjs(data.date).format('MM/DD/YYYY')} ${dayjs(data.endTime).format('HH:MM')}`,
+        startTime: `${dayjs(data.date).format('MM/DD/YYYY')} ${dayjs(data.startTime).format('HH:mm')}`,
+        endTime: `${dayjs(data.date).format('MM/DD/YYYY')} ${dayjs(data.endTime).format('HH:mm')}`,
       }
       OnSubscribeSelect(dataWebsite.data)
     };
