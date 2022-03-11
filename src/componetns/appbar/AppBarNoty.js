@@ -11,6 +11,7 @@ import SessionService from '../../services/SessionService'
 import HomeIcon from '@mui/icons-material/Home';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/system';
+import { VERSION } from '../../Configuration';
 
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
@@ -98,6 +99,7 @@ export const AppBarNoty = () => {
             </List>
 
             <img src={process.env.PUBLIC_URL + '/logo.png'} className="app-sidebar-logo" />
+            <div className='app-sidebar-version'>{VERSION}</div>
           </Drawer>
     </>)
 }

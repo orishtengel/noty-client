@@ -32,3 +32,15 @@
     bottom: 20px;
     position: absolute;
 }
+
+.app-sidebar-version {
+    color: gray;
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    margin-left: auto;
+    font-size: 14px;
+    margin-right: auto;
+    text-align: center;
+    right: 0;
+}
