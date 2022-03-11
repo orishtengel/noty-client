@@ -15,7 +15,7 @@ export const getDayShort = (date) => {
 export const getLtime = (date) => {
   if (date) {
     let d = dayjs(date)
-    return d.format('hh:mm')
+    return d.format('hh:mm A')
   }
   return ""
 }
