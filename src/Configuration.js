@@ -6,3 +6,5 @@ export const SERVER_URL = `https://${SERVER_DOMAIN}` // https://
 export const WS_URL = `wss://${SERVER_DOMAIN}`
 
 export const DATE_FORMAT = "YYYY-MM-DD H:mm Z"
+
+export const VERSION = 'v1.0.0'
