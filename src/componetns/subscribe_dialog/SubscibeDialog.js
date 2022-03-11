@@ -67,6 +67,8 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                     <MobileDatePicker
                         {...field}
                         label="Date"
+                        maxDate={new Date(dateNow.getTime() + (7 * 24 * 60 * 60 * 1000))}
+                        disablePast
                         onChange={handleDate}
                         inputFormat="MM/dd/yyyy"
                         value={getValues('date')}
