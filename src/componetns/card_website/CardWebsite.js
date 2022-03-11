@@ -18,8 +18,7 @@ export const CardWebsite = ({idWebsite, appdata}) => {
     }
     const subscibeSelect = (data) => {
       if(data) {
-        subscribeContext.addSubscribe(idWebsite, appdata.name, data.email, data.date, data.startTime, 
-          data.endTime, data.frequncy)
+        subscribeContext.addSubscribe({ ...data, courseName: appdata.name, idWebsite: idWebsite })
         setDialogData({open: false, data: dialogData})
       }
       else {

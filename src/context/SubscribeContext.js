@@ -29,9 +29,9 @@ export const SubscribeContextStore = React.createContext(defaultState)
 const SubscribeContext = (props) => {
     
     const [state,dispatch] = React.useReducer(reducer,defaultState)
-    const addSubscribe = async (idWebsite, courseName, username, date ,startTime, endTime, frequncy) => {
+    const addSubscribe = async (data) => {
         
-        const resp = await SubscribeApi.addSubscribe(idWebsite, courseName, username, date, startTime, endTime, frequncy)
+        const resp = await SubscribeApi.addSubscribe(data)
         
         if (resp.ok) {
             EventBus.publish('SHOW_ALERT',"success, You are now Subscribed")
