@@ -7,6 +7,7 @@ import './SubscribeDialog.css'
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import {formatUTC, shortDate } from '../../services/dateUtils';
 import { TimePicker } from '@mui/lab';
+import dayjs from 'dayjs';
 
 
 
@@ -22,22 +23,16 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
         }
       });
     
-    const handleDate = (newValue) => {
-      setValue('date', newValue)
-    }
-    const handleStartTime = (newValue) => {
-      setValue('startTime', newValue)
-    }
-    const handleEndTime = (newValue) => {
-      setValue('endTime', newValue)
-    }
+    const handleDate = (newValue) => setValue('date', newValue)
+    const handleStartTime = (newValue) => setValue('startTime', newValue)
+    const handleEndTime = (newValue) => setValue('endTime', newValue)
 
     const onSubmit = data => {
       dataWebsite.data = {
         ...data,
-        date: shortDate(data.date),
-        startTime: formatUTC(data.startTime),
-        endTime: formatUTC(data.endTime)
+        date: dayjs(data.date).format('MM/DD/YYYY'),
+        startTime: dayjs(data.startTime).format('MM/DD/YYYY HH:MM'),
+        endTime: dayjs(data.endTime).format('MM/DD/YYYY HH:MM')
       }
       OnSubscribeSelect(dataWebsite.data)
     };
