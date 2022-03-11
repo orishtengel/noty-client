@@ -10,6 +10,10 @@ import { getName } from '../../services/dateUtils'
 import SessionService from '../../services/SessionService'
 import HomeIcon from '@mui/icons-material/Home';
 import { useHistory } from 'react-router-dom';
+import { styled } from '@mui/system';
+
+
+const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 
 
@@ -43,7 +47,7 @@ export const AppBarNoty = () => {
 
     return (<>
      <Box sx={{ flexGrow: 1 }}>
-      <AppBar className='gradient_appbar' position="static">
+      <AppBar className='gradient_appbar' position="fixed">
         <Toolbar>
           <FlexView vAlignContent='center' style={{width: '100%', justifyContent: 'space-between'}}>          
             <IconButton
@@ -59,6 +63,8 @@ export const AppBarNoty = () => {
           </FlexView>
         </Toolbar>
       </AppBar>
+      <Offset />
+      <Toolbar />
     </Box>
     <Drawer PaperProps={{style: {width: '300px'}}} anchor={'left'} open={menuOpen} onClose={closeMenu}>
             {SessionService.isLoggedIn() && <>
