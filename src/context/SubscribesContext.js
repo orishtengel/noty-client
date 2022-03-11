@@ -27,7 +27,6 @@ export const SubscribesContextStore = React.createContext(defaultState)
 
 const SubscribesContext = (props) => {
     const [state,dispatch] = React.useReducer(reducer,defaultState)
-    console.log(state)
 
     const getSubscriptions = async (apps) => {
         const arr = []

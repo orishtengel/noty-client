@@ -47,7 +47,6 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
     return (<>
       <Dialog
         fullWidth
-        transi
         open={dataWebsite.open}
         className='dialog'
         onClose={close}
@@ -71,7 +70,7 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                         onChange={handleDate}
                         inputFormat="MM/dd/yyyy"
                         value={getValues('date')}
-                        renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField fullWidth {...params} />}
                         />
                         </>}/>
             </Grid>
@@ -85,7 +84,7 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                     label="Start time"
                     value={getValues('startTime')}
                     onChange={handleStartTime}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField fullWidth {...params} />}
                 /> </>} />
             </Grid>
             <Grid item xs={12}>
@@ -98,7 +97,7 @@ export const SubscribeDialog = ({dataWebsite, OnSubscribeSelect}) => {
                       label="End time"
                       value={getValues('endTime')}
                       onChange={handleEndTime}
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => <TextField fullWidth {...params} />}
                       /> </>} />
             </Grid>
             <Grid item xs={12}>

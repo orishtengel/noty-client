@@ -29,7 +29,6 @@ export const getUTCformat = (date) => {
 }
 
 export const getDayMonth = (date) => {
-  console.log(date)
   if (date) {
     let d = dayjs(date)
     return d.format('D')

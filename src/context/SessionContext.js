@@ -82,7 +82,6 @@ const SessionContext = (props) => {
 
     const createUser = async (username, name, phone) => {
         const resp = await AuthApi.createUser(username,name,phone)
-        console.log(resp)
         if(resp.ok) {
             dispatch({type: 'SET_USER', data: { email: username, name: name, phone: phone }})
             history.push('/')
@@ -92,9 +91,7 @@ const SessionContext = (props) => {
 
     const loadUser = async () => {
         if(SessionService.isLoggedIn()) {
-            console.log("dsadsa")
             let resp = await AuthApi.getUser()
-            console.log(resp)
             if (resp.ok) {
                 dispatch({type: 'SET_USER', data: { email: resp.data.data.email, name: resp.data.data.name }})
             }
