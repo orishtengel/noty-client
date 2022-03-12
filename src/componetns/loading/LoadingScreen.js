@@ -9,6 +9,11 @@ export const LoadingScreen = () => {
     const [open, setOpen] = React.useState(false)
 
     React.useEffect(() => {
+        // fix the scrolling problem
+        document.body.style.overflow = 'unset'
+    }, [open])
+
+    React.useEffect(() => {
 
         const subscription1 = EventBus.subscribe("SHOW_LOADING", () => setOpen(true))
         const subscription2 = EventBus.subscribe("HIDE_LOADING", () => setOpen(false))
