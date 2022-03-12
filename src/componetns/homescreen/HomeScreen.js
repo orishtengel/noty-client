@@ -5,7 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 import './HomeScreen.css'
 import { ApplicationsContextStore } from '../../context/ApplicationsContext';
 import { SessionContextStore } from '../../context/SessionContext';
-
+import '../../config_firebase/ConfigFirebase'
+import firebase from 'firebase/app'
+import 'firebase/messaging'
+import ApplicationsApi from '../../api/ApplicationsApi';
 
 export const HomeScreen = () => { 
     const sessionContext = React.useContext(SessionContextStore)
@@ -15,6 +18,12 @@ export const HomeScreen = () => {
         applcationContext.loadApplications()
     },[])
 
+    React.useEffect(() => {
+        const messaging = firebase.messaging()
+        messaging.getToken().then(async pushNotificationToken => {
+            await ApplicationsApi.updateUserPushNotificationToken(pushNotificationToken)
+        })
+    }, [])
 
     return(<>
     <Container>
