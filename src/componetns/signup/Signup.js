@@ -17,6 +17,8 @@ import FlexView from 'react-flexview/lib';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import './Signup.css'
+import EventBus from '../../eventbus/EventBus';
+
 
 
 const theme = createTheme();
@@ -35,8 +37,14 @@ const SignupForm = () => {
     const onSubmit = data => signup(data.email, data.password, data.firstname + " " + data.lastname, data.phone)
 
     const signup = (email,password,name,phone) => {
-       sessionContext.signup(email, password)
-       sessionContext.createUser(email, name, phone)
+      console.log(typeof(password))
+      if(password && password.length < 6) {
+        EventBus.publish("SHOW_ALERT,error,password should contain at least 6 charaters")
+      }
+      else {
+        sessionContext.signup(email, password)
+        sessionContext.createUser(email, name, phone)
+      }
     }
 
     return <Box

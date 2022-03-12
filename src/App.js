@@ -24,6 +24,7 @@ import SubscribesContext from './context/SubscribesContext';
 import { LoadingScreen } from './componetns/loading/LoadingScreen';
 import { Alerts } from './componetns/alerts/Alerts';
 import { SubscribeScreen } from './componetns/subscribe_screen/SubscribeScreen';
+import { Signup_new } from './componetns/signup/Signup_new';
 
 const theme = createTheme({
   palette: {
@@ -49,7 +50,7 @@ function App() {
             <Login/>
           </Route>
           <Route path="/signup">
-            <Signup/>
+            <Signup_new/>
           </Route>
             <ApplicationsContext>
               <AppBarNoty/>
