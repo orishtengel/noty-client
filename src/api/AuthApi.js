@@ -2,6 +2,7 @@ const { default: ApiCore, HTTPMethod } = require("./ApiCore");
 
 class AuthApi {
     login(username, password) {
+        console.log(username)
         return ApiCore.fetch('/auth/signin', HTTPMethod.POST, {
             email: username,
             password: password
