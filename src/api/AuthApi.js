@@ -28,7 +28,7 @@ class AuthApi {
         return ApiCore.fetch('/auth/createUser', HTTPMethod.POST, {
             email: username,
             name: name,
-            phone: phone
+            phone: '0'
         })
     }
 

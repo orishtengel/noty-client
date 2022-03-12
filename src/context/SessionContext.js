@@ -80,10 +80,10 @@ const SessionContext = (props) => {
         }
     }
 
-    const createUser = async (username, name, phone) => {
-        const resp = await AuthApi.createUser(username,name,phone)
+    const createUser = async (username, name) => {
+        const resp = await AuthApi.createUser(username,name)
         if(resp.ok) {
-            dispatch({type: 'SET_USER', data: { email: username, name: name, phone: phone }})
+            dispatch({type: 'SET_USER', data: { email: username, name: name }})
             history.push('/')
         }
         return resp

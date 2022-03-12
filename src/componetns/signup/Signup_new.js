@@ -29,15 +29,18 @@ const SignupForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        if(data.get('password') && data.get('password') < 6) {
+        const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
+        const isOk = re.test(data.get('password'));
+
+        if(!isOk) {
             console.log("dsads")
             
-            EventBus.publish('SHOW_ALERT',"error,password should contain at least 6 charaters")
+            EventBus.publish('SHOW_ALERT',"error,password is weak must contain at least one uppercace lowercase and 8 characters")
 
           }
           else {
             sessionContext.signup(data.get('email'), data.get('password'))
-            sessionContext.createUser(data.get('email'), data.get('name'), data.get('phone'))
+            sessionContext.createUser(data.get('email'), data.get('firstname') + " " + data.get('lastname') )
           }
       };
 
@@ -55,7 +58,7 @@ const SignupForm = () => {
     <Typography component="h1" variant="h5">
       Sign Up
     </Typography>
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
          <TextField
                 margin="normal"
                 required
