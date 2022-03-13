@@ -33,8 +33,6 @@ const SignupForm = () => {
         const isOk = re.test(data.get('password'));
 
         if(!isOk) {
-            console.log("dsads")
-            
             EventBus.publish('SHOW_ALERT',"error,password is weak must contain at least one uppercace lowercase and 8 characters")
 
           }

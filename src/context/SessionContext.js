@@ -60,10 +60,7 @@ const SessionContext = (props) => {
                 }
             }
         catch (err) {
-            if (err.code === 'auth/user-not-found')
-                EventBus.publish('SHOW_ALERT','error,Unauthorized user')
-            else 
-                history.push('/')
+            EventBus.publish('SHOW_ALERT',"error," + err.message)
         }
     }
 
