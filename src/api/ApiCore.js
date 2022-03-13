@@ -14,7 +14,7 @@ export default class ApiCore {
     static async fetch(url, method, body) {
         try {
             EventBus.publish('SHOW_LOADING')
-
+            console.log(SERVER_URL)
             let fullUrl = SERVER_URL + url
 
             if(!method) method = HTTPMethod.GET
